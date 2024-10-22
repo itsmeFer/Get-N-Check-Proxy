@@ -37,16 +37,19 @@ def test_proxy(proxy):
         print(f"Proxy {proxy} is invalid!")
         return False
 
-# Fungsi untuk menampilkan daftar proxy dan mengujinya
+# Fungsi untuk menampilkan daftar proxy, mengujinya, dan menyimpannya ke file
 def display_proxies_and_test(proxies):
     working_proxies = []
-    for proxy in proxies:
-        print(f"Testing Proxy: {proxy}")
-        if test_proxy(proxy):
-            working_proxies.append(proxy)
-            print(f"Proxy {proxy} is working.\n")
-        else:
-            print(f"Proxy {proxy} is not working.\n")
+    with open('good.txt', 'w') as good_file, open('bad.txt', 'w') as bad_file:
+        for proxy in proxies:
+            print(f"Testing Proxy: {proxy}")
+            if test_proxy(proxy):
+                working_proxies.append(proxy)
+                good_file.write(f"{proxy}\n")  # Simpan proxy yang valid ke good.txt
+                print(f"Proxy {proxy} is working.\n")
+            else:
+                bad_file.write(f"{proxy}\n")  # Simpan proxy yang tidak valid ke bad.txt
+                print(f"Proxy {proxy} is not working.\n")
     return working_proxies
 
 # URL untuk scraping proxy berdasarkan negara (misalnya, SSLProxies)
@@ -60,7 +63,7 @@ print(f"\nProxy List from {url}:\n")
 for proxy in proxies:
     print(proxy)
 
-# Menguji setiap proxy apakah valid atau tidak
+# Menguji setiap proxy apakah valid atau tidak dan menyimpannya ke file
 working_proxies = display_proxies_and_test(proxies)
 
 # Tampilkan proxy yang valid
