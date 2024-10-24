@@ -1,7 +1,18 @@
 import requests
 from bs4 import BeautifulSoup
 
-# Fungsi untuk mengambil proxy dari halaman SSLProxies
+# Dictionary yang berisi URL proxy untuk setiap negara
+proxy_urls = {
+    'US': 'https://www.sslproxies.org/',  # Proxy untuk Amerika Serikat
+    'GB': 'https://free-proxy-list.net/uk-proxy.html',  # Proxy untuk Inggris
+    'CA': 'https://www.proxy-list.download/Canada',  # Proxy untuk Kanada
+    'DE': 'https://www.proxy-list.download/Germany',  # Proxy untuk Jerman
+    'FR': 'https://www.proxy-list.download/France',  # Proxy untuk Prancis
+    'JP': 'https://www.proxy-list.download/Japan',  # Proxy untuk Jepang
+    # Tambahkan negara lainnya di sini...
+}
+
+# Fungsi untuk mengambil proxy dari halaman proxy tertentu
 def get_proxies(url):
     proxies = []
     response = requests.get(url)
@@ -20,53 +31,35 @@ def get_proxies(url):
 def test_proxy(proxy):
     url = 'https://httpbin.org/ip'  # Halaman untuk memeriksa IP
     try:
-        # Menyusun dictionary untuk proxy
         proxies = {
             "http": f"http://{proxy}",
             "https": f"http://{proxy}"
         }
-        # Mengirim permintaan untuk memeriksa IP dengan proxy
         response = requests.get(url, proxies=proxies, timeout=5)
         if response.status_code == 200:
-            print(f"Proxy {proxy} works!")
             return True
-        else:
-            print(f"Proxy {proxy} failed!")
-            return False
+        return False
     except requests.RequestException:
-        print(f"Proxy {proxy} is invalid!")
         return False
 
-# Fungsi untuk menampilkan daftar proxy, mengujinya, dan menyimpannya ke file
-def display_proxies_and_test(proxies):
-    working_proxies = []
-    with open('good.txt', 'w') as good_file, open('bad.txt', 'w') as bad_file:
-        for proxy in proxies:
-            print(f"Testing Proxy: {proxy}")
-            if test_proxy(proxy):
-                working_proxies.append(proxy)
-                good_file.write(f"{proxy}\n")  # Simpan proxy yang valid ke good.txt
-                print(f"Proxy {proxy} is working.\n")
-            else:
-                bad_file.write(f"{proxy}\n")  # Simpan proxy yang tidak valid ke bad.txt
-                print(f"Proxy {proxy} is not working.\n")
-    return working_proxies
+# Fungsi untuk menguji dan menyimpan proxy dari berbagai negara
+def save_proxies_by_country():
+    for country, url in proxy_urls.items():
+        print(f"Fetching proxies for {country} from {url}...")
 
-# URL untuk scraping proxy berdasarkan negara (misalnya, SSLProxies)
-url = 'https://www.sslproxies.org/'  # Ganti dengan URL proxy lainnya sesuai negara yang ingin di-scrape
+        # Ambil proxy dari URL berdasarkan negara
+        proxies = get_proxies(url)
 
-# Ambil proxy dari URL
-proxies = get_proxies(url)
+        # File untuk menyimpan proxy
+        with open(f'{country}_good.txt', 'w') as good_file, open(f'{country}_bad.txt', 'w') as bad_file:
+            for proxy in proxies:
+                print(f"Testing Proxy: {proxy}")
+                if test_proxy(proxy):
+                    good_file.write(f"{proxy}\n")
+                    print(f"Proxy {proxy} is working.")
+                else:
+                    bad_file.write(f"{proxy}\n")
+                    print(f"Proxy {proxy} is not working.")
 
-# Tampilkan proxy yang berhasil ditemukan
-print(f"\nProxy List from {url}:\n")
-for proxy in proxies:
-    print(proxy)
-
-# Menguji setiap proxy apakah valid atau tidak dan menyimpannya ke file
-working_proxies = display_proxies_and_test(proxies)
-
-# Tampilkan proxy yang valid
-print("\nWorking Proxies:\n")
-for proxy in working_proxies:
-    print(proxy)
+# Menjalankan fungsi untuk mengambil dan menyimpan proxy
+save_proxies_by_country()
