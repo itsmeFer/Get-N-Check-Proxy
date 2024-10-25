@@ -42,16 +42,16 @@ def test_proxy(proxy):
     except requests.RequestException:
         return False
 
-# Fungsi untuk menguji dan menyimpan proxy dari berbagai negara
-def save_proxies_by_country():
-    for country, url in proxy_urls.items():
-        print(f"Fetching proxies for {country} from {url}...")
+# Fungsi untuk menguji dan menyimpan proxy ke satu file
+def save_proxies_to_single_file():
+    with open('good.txt', 'w') as good_file, open('bad.txt', 'w') as bad_file:
+        for country, url in proxy_urls.items():
+            print(f"Fetching proxies for {country} from {url}...")
 
-        # Ambil proxy dari URL berdasarkan negara
-        proxies = get_proxies(url)
+            # Ambil proxy dari URL berdasarkan negara
+            proxies = get_proxies(url)
 
-        # File untuk menyimpan proxy
-        with open(f'{country}_good.txt', 'w') as good_file, open(f'{country}_bad.txt', 'w') as bad_file:
+            # Uji setiap proxy dan simpan ke file yang sesuai
             for proxy in proxies:
                 print(f"Testing Proxy: {proxy}")
                 if test_proxy(proxy):
@@ -61,5 +61,5 @@ def save_proxies_by_country():
                     bad_file.write(f"{proxy}\n")
                     print(f"Proxy {proxy} is not working.")
 
-# Menjalankan fungsi untuk mengambil dan menyimpan proxy
-save_proxies_by_country()
+# Menjalankan fungsi untuk mengambil dan menyimpan proxy ke satu file
+save_proxies_to_single_file()
