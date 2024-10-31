@@ -69,7 +69,7 @@ def make_request_with_rotating_proxy(url, working_proxies):
                 print("Permintaan berhasil!")
                 return response.text
         except requests.RequestException:
-            print(f"Proxy {proxy} gagal. Mengganti proxy...\n")
+            print(f"Proxy {proxy} gagal. Sedang Mengganti proxy...\n")
             working_proxies.remove(proxy)
             if not working_proxies:
                 print("Tidak ada proxy yang aktif.")
