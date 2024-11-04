@@ -133,6 +133,6 @@ if proxies_aktif:
     buat_permintaan_dengan_rotasi_proxy(target_url, proxies_aktif, bahasa)
 else:
     if bahasa == "ID":
-        print("Tidak ada proxy yang aktif ditemukan.")
+        print("Maaf, Tidak ada proxy yang aktif ditemukan.")
     else:
-        print("No active proxies found.")
+        print("Sorry, No active proxies found.")
