@@ -118,9 +118,9 @@ def buat_permintaan_dengan_rotasi_proxy(url, proxies_aktif, lang):
             proxies_aktif.remove(proxy)
             if not proxies_aktif:
                 if lang == "ID":
-                    print("Tidak ada proxy yang aktif.")
+                    print("Maaf, Tidak ada proxy yang aktif.")
                 else:
-                    print("No active proxies available.")
+                    print("Sorry, No active proxies available.")
                 return None
 
 # Menjalankan program
