@@ -79,7 +79,7 @@ def ambil_dan_filter_proxies(lang):
     # Uji setiap proxy dan simpan yang berfungsi
     for proxy in proxies:
         if lang == "ID":
-            print(f"Menguji Proxy: {proxy}")
+            print(f"Sedang Menguji Proxy: {proxy}")
         else:
             print(f"Testing Proxy: {proxy}")
             
