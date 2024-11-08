@@ -81,7 +81,7 @@ def ambil_dan_filter_proxies(lang):
         if lang == "ID":
             print(f"Sedang Menguji Proxy: {proxy}")
         else:
-            print(f"Testing Proxy: {proxy}")
+            print(f"Waiting for Testing Proxy: {proxy}")
             
         if uji_proxy(proxy, lang):
             proxies_aktif.append(proxy)
