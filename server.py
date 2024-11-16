@@ -70,9 +70,9 @@ def uji_proxy(proxy, lang):
 def ambil_dan_filter_proxies(lang):
     proxies_aktif = []
     if lang == "ID":
-        print("Mengambil proxy dari:", proxy_url)
+        print(" Sedang Mengambil proxy dari:", proxy_url)
     else:
-        print("Fetching proxies from:", proxy_url)
+        print("Procces for Fetching proxies from:", proxy_url)
         
     proxies = ambil_proxies(proxy_url, lang)
 
