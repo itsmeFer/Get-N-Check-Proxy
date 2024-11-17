@@ -61,7 +61,7 @@ def uji_proxy(proxy, lang):
     except requests.RequestException:
         pass
     if lang == "ID":
-        print(f"Proxy {proxy} tidak aktif.")
+        print(f"Proxy {proxy} ini tidak aktif.")
     else:
         print(f"Proxy {proxy} is inactive.")
     return False
