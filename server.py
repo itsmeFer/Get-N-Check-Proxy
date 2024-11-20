@@ -10,7 +10,7 @@ def pilih_bahasa():
     print("Pilih bahasa / Choose language:")
     print("1. Bahasa Indonesia")
     print("2. English")
-    pilihan = input("Masukkan pilihan Anda / Enter your choice: ")
+    pilihan = input("Silahkan Masukkan pilihan Anda / Enter your choice: ")
     if pilihan == '1':
         return "ID"
     elif pilihan == '2':
