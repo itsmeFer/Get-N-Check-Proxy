@@ -16,7 +16,7 @@ def pilih_bahasa():
     elif pilihan == '2':
         return "EN"
     else:
-        print("Pilihan ini tidak valid. Menggunakan bahasa Inggris sebagai default.")
+        print("Maaf Pilihan ini tidak valid. Menggunakan bahasa Inggris sebagai default.")
         return "EN"
 
 # Fungsi untuk mengambil proxy dari halaman
