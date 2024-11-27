@@ -33,7 +33,7 @@ def ambil_proxies(url, lang):
             proxies.append(f"{ip}:{port}")
     
     if lang == "ID":
-        print("Proxy berhasil diambil.")
+        print("Proxy ini berhasil diambil.")
     else:
         print("Proxies successfully retrieved.")
         
